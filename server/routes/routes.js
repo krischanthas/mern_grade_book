@@ -8,10 +8,6 @@ const UserModel = require('../models/UserModel');
 const verifyToken = require('../util/verifyToken');
 const verifyAdminRole = require('../util/verifyAdmin');
 
-// router.get('/', verifyToken, (req, res) => {
-//     res.send(req.user);
-//     //User.findOneBy({ _id: req.user})
-// })
 
 // get all courses
 router.get('/courses', verifyToken, verifyAdminRole, async (req, res) => {
@@ -79,6 +75,7 @@ router.get('/users', verifyToken, verifyAdminRole, async (req, res) => {
         res.status(400).send(err);
     }
 })
+
 
 
 

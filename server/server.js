@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 // import routes
 const authRoute = require('./routes/authRoutes');
 const routes = require('./routes/routes'); 
@@ -15,10 +16,10 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopo
 
 // Middleware
 app.use(express.json());
-
+app.use(cors())
 
 // route middleware
 app.use('/api/users', authRoute)
 app.use('/api/', routes)
 
-app.listen(3000, () => console.log('Server is running...'))
+app.listen(7000, () => console.log('Server is running...'))
