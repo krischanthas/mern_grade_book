@@ -1,30 +1,55 @@
-import { AUTHENTICATED, UNAUTHENTICATED, SET_USER } from '../types';
+import { USER_LOADED, USER_LOADING, USER_LOADING_END, USER_LOGGED_OUT } from '../types';
 
 const initialState = {
-    user: {},
-    authenticated: false
+    auth: {
+        token: localStorage.getItem('authToken'),
+        isAuthenticated: null,
+        isLoading: false,
+        user: null
+    }
+
 }
 
-export default function( state = initialState, action ) {
-    switch(action.type) {
-        case AUTHENTICATED: 
-            return {
-                authenticated: true
-            }
-        
-        case UNAUTHENTICATED: 
-            return {
-                authenticated: false
-            }
-        
-        case SET_USER: 
+export default function (state = initialState, action) {
+    switch (action.type) {
+        case USER_LOADED:
             return {
                 ...state,
-                user: action.payload
+                auth: {
+                    isAuthenticated: true,
+                    isLoading: false,
+                    user: action.payload
+                }
+
             }
-        
-        default: 
-            return {...state}
-        
+        case USER_LOADING:
+            return {
+                ...state,
+                auth: {
+                    isLoading: true
+                }
+            }
+        case USER_LOADING_END:
+            return {
+                ...state,
+                auth: {
+                    isLoading: false
+                }
+            }
+        case USER_LOGGED_OUT: 
+            return {
+                ...state,
+                auth: {
+                    isAuthenticated: null,
+                    isLoading: false,
+                    user: null
+                }
+            }
+        default:
+            return {
+                ...state
+            }
     }
-} 
+}
+
+

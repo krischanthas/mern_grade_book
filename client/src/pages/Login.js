@@ -1,41 +1,33 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 // redux
 import { connect } from 'react-redux';
 import { logIn } from "../redux/actions";
 
-class Login extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            email: '',
-            password: ''
-        }
-    }
-    handleChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
-    }
+const Login = (props) => {
 
-    handleSubmit = (e) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        this.props.logIn(this.state.email, this.state.password);
-        
+        props.logIn(email, password);
+
     }
 
-    render() {
-        return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
+    return (
+        <div className="container">
+            <h1>Login</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
                     <label>Email</label>
-                    <input type="text" name="email" onChange={this.handleChange}/>
+                    <input type="text" name="email" className="form-control" onChange={(e) => (setEmail(e.target.value))} />
                     <label>Password</label>
-                    <input type="text" name="password" onChange={this.handleChange}/>
-                    <button>Login</button>
-                </form>
-            </div>
-        )
-    }
+                    <input type="text" name="password" className="form-control" onChange={(e) => (setPassword(e.target.value))} />
+                    <button className="btn btn-primary mt-4">Login</button>
+                </div>
+            </form>
+        </div>
+    )
 }
 
-export default connect(null, {logIn})(Login);
+export default connect(null, { logIn })(Login);
