@@ -8,7 +8,7 @@ const verifyAdminRole = async (req, res, next) => {
         const userRole = await UserModel.findById(req.user._id);
 
         if (userRole.role === 'admin') {
-            req.user.role = userRole;
+            req.user = userRole;
             next();
         } else {
             return res.status(401).send('Admin access only');

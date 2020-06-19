@@ -3,7 +3,7 @@ const UserModel = require('../models/UserModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { validateRegistration, validateLogin } = require('../util/validation');
-
+const verifyToken = require('../util/verifyToken');
 /**
  * Register user 
  */
@@ -32,6 +32,7 @@ router.post('/register', async (req, res) => {
         await user.save();
         res.status(201).send('User successfully registered');
     } catch (err) {
+        console.error(err);
         res.status(400).send(err);
     }
 });
@@ -52,17 +53,39 @@ router.post('/login', async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).json({ message: 'Invalid password' });
 
-
     // create and assign token
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_TOKEN);
-    res.header('Authorization', token).json({ token, user: {
-        id: user._id,
-        name: user.name, 
-        email: user.email,
-        role: user.role
-    }});
+    res.header('Authorization', token).json({
+        token,
+        user: {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role
+        }
+    });
 
 })
+
+/**
+ *  This route is used to get current logged in user's information
+ */
+router.get('/user', verifyToken, async (req, res) => {
+    try {
+        const user = await UserModel.findById(req.user);
+        if (!user) throw Error('User Does not exist');
+        res.json({
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role
+            }
+        });
+    } catch (e) {
+        console.error(e);
+    }
+});
 
 
 module.exports = router;

@@ -6,6 +6,11 @@ const GradeSchema = new Schema({
         type: String,
         required: true
     },
+    userName: {
+        type: String,
+        required: true,
+        trim: true
+    },
     courseId: {
         type: String,
         required: true,

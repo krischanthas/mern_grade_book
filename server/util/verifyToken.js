@@ -14,6 +14,8 @@ const verifyToken = async (req, res, next) => {
     try {
         // if verified an object is returned containing the jwt payload (which includes _id) 
         const verified = jwt.verify(token, process.env.JWT_SECRET_TOKEN);
+        
+        // temporarily stores id. Once role is verified, user object is assigned
         req.user = verified;
         next();
     } catch (err) {

@@ -12,14 +12,14 @@ const CourseSchema = new Schema({
         required: true,
         trim: true,
     },
+    instructorId: {
+        type: String,
+        required: true,
+    },
     courseLength: {
         type: String,
         required: true,
  
-    },
-    grades: {
-        type: Array,
-        default: []
     },
     createdDate : {
         type: Date,
