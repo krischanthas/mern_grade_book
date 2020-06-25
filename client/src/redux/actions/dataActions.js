@@ -42,7 +42,7 @@ export const getCourse = (courseId) => dispatch => {
 
 export const addCourse = (formData) => dispatch => {
     dispatch({ type: LOADING_UI });
-
+    console.log(formData)
     Axios
         .post('http://localhost:7000/api/courses/add', formData)
         .then(response => {

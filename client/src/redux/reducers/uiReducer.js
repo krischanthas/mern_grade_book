@@ -1,10 +1,12 @@
 import { LOADING_UI, LOADING_END, SET_ERRORS, CLEAR_ERRORS } from '../types';
 
 const initialState = {
-    ui: {
-        errors: null,
-        loading: false
-    }
+    // ui: {
+    //     errors: null,
+    //     loading: false
+    // }
+    errors: null,
+    loading: false
 }
 
 export default function (state = initialState, action) {

@@ -3,6 +3,7 @@ import { USER_LOADED, USER_LOGGED_OUT, LOADING_UI, LOADING_END, SET_ERRORS, CLEA
 import axios from 'axios'
 import history from '../history';
 import { getMyCourses } from "./dataActions";
+import { getBasicUserCourses } from "./basicUserActions";
 
 
 /**
@@ -68,7 +69,11 @@ export const getUserData = () => dispatch => {
         .get('http://localhost:7000/api/users/user')
         .then(response => {
             dispatch({ type: USER_LOADED, payload: response.data.user });
-            dispatch(getMyCourses());
+            if (response.data.user.role === 'admin') {
+                dispatch(getMyCourses());
+            } else if (response.data.user.role === 'basic') {
+                dispatch(getBasicUserCourses());
+            }
 
             dispatch({ type: LOADING_END })
 

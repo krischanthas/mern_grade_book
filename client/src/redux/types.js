@@ -24,3 +24,12 @@ export const LOADING_END = 'LOADING_END';
 export const SET_ERRORS = 'SET_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
+
+
+
+// basic user
+export const SET_AVAILABLE_COURSES = 'SET_AVAILABLE_COURSES';
+export const SET_BASIC_USER_COURSES = 'SET_BASIC_USER_COURSES';
+export const ENROLLED_COURSE = 'ENROLLED_COURSE';
+export const SET_COURSE_INFO = 'SET_COURSE_INFO';
+export const SET_GRADES = 'SET_GRADES';

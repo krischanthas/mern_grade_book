@@ -10,13 +10,15 @@ class AddGrade extends React.Component {
         super(props);
         this.state = {
             student: {},
-            grade: ''
+            grade: '',
+            gradeDescription: ''
         }
     }
 
     componentDidMount() {
         // load typeahead dropdown options
         this.props.getAllUsers('basic');
+
     }
 
     handleAddClick = (e) => {
@@ -25,6 +27,7 @@ class AddGrade extends React.Component {
             userId: this.state.student.id,
             userName: this.state.student.label,
             courseId: this.props.courseId,
+            gradeDescription: this.state.gradeDescription,
             grade: this.state.grade
         });
     };
@@ -33,16 +36,14 @@ class AddGrade extends React.Component {
     render() {
         return (
 
-            <Card style={{ width: '18rem' }}>
+            // <Card style={{ width: '18rem' }}>
+            <Card>
                 <Card.Body>
                     <Card.Title>Add User Grade</Card.Title>
                     <Form onSubmit={this.handleAddClick}>
 
-                        {/* course component */}
                         <Form.Group controlId="formCourseName">
                             <Form.Label>User</Form.Label>
-                            {/* <Form.Control type="text" name="student" placeholder="Enter course name" onChange={(e) => (setFormData.student(e.target.value))} value={formData.student} />
-                    <Form.Text className="text-muted">Course name must be unique</Form.Text> */}
                             <Typeahead
                                 id="users"
                                 minLength={3}
@@ -52,7 +53,10 @@ class AddGrade extends React.Component {
                                 }}
                             />
                         </Form.Group>
-
+                        <Form.Group controlId="formGradeDescription">
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control type="text" name="gradeDescription" placeholder="Enter description" onChange={(e) => (this.setState({ gradeDescription: e.target.value }))} value={this.state.gradeDescription} />
+                        </Form.Group>
                         <Form.Group controlId="formCourseLength">
                             <Form.Label>Grade</Form.Label>
                             <Form.Control type="number" name="grade" placeholder="Enter grade" onChange={(e) => (this.setState({ grade: e.target.value }))} value={this.state.grade} />

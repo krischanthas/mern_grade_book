@@ -11,6 +11,8 @@ import Home from './pages/Home';
 import NavigationBar from "./components/NavigationBar";
 import Dashboard from './pages/Dashboard';
 import Course from './components/Course';
+import MyGrades from './components/MyGrades';
+import PrivateRoute from './components/PrivateRoute';
 
 // redux
 import { Provider } from "react-redux";
@@ -37,8 +39,13 @@ function App() {
                                           <Route exact path="/" component={Home} />
                                           <Route path="/login" component={Login} />
                                           <Route path="/register" component={Registration} />
-                                          <Route path="/dashboard" component={Dashboard} />
+
+                                          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+
+
+                                          {/* <Route path="/dashboard" component={Dashboard} /> */}
                                           <Route path="/courses/:courseId" component={Course} />
+                                          <Route path="/grades/:courseId" component={MyGrades} />
                                     </Switch>
                               </Router>
                         </BrowserRouter>
