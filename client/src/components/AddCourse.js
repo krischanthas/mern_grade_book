@@ -23,7 +23,7 @@ const AddCourse = (props) => {
 
     return (
         <div className="container">
-            <Button className="mt-4" variant="primary" onClick={() => (setShow(true))}>Add Course</Button>
+            <Button className="mt-4 mb-4" variant="primary" onClick={() => (setShow(true))}>Add Course</Button>
 
             {/* Add Course Modal */}
             <Modal show={show} onHide={() => (setShow(false))}>

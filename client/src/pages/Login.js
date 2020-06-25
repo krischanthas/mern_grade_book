@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 // redux
 import { connect } from 'react-redux';
 import { logIn } from "../redux/actions";
-import { Card, Alert, Container, Row, Col } from 'react-bootstrap';
+import { Card, Alert, Container, Row, Col, Spinner } from 'react-bootstrap';
 
 const Login = (props) => {
 
@@ -18,9 +18,9 @@ const Login = (props) => {
     return (
         <Fragment>
             <h1 className="text-center pt-5">Login</h1>
-            {alert}
 
             <Card style={{ width: '50%' }} className="mx-auto shadow p-3 mb-5 bg-white rounded">
+                {alert}
                 <Card.Body>
                     <Container>
                         <Row className="justify-content-center align-items-center">
@@ -32,11 +32,12 @@ const Login = (props) => {
                                         <label className="text-info">Password</label>
                                         <input type="text" name="password" className="form-control" onChange={(e) => (setPassword(e.target.value))} />
                                         <button className="btn btn-primary mt-4">Login</button>
+                                        <div className="mt-4">{props.UI.loading ? (<Spinner animation="border" variant="primary" />
+                                        ) : null}</div>
                                     </div>
                                 </form>
                             </Col>
                         </Row>
-
                     </Container>
                 </Card.Body>
             </Card>

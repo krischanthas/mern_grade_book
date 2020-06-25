@@ -18,14 +18,16 @@ const MyGrades = (props) => {
                 <Card.Body>
                     <Table>
                         <thead>
-                            <th>Course</th>
-                            <th>Description</th>
-                            <th>Grade</th>
-                            <th>Date</th>
+                            <tr>
+                                <th>Course</th>
+                                <th>Description</th>
+                                <th>Grade</th>
+                                <th>Date</th>
+                            </tr>
                         </thead>
                         <tbody>
                             {props.grades.map(grade => (
-                                <tr>
+                                <tr key={grade._id}>
                                     <td>{grade.courseId}</td>
                                     <td>{grade.gradeDescription}</td>
                                     <td>{grade.grade}</td>
