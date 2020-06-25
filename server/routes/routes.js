@@ -41,6 +41,7 @@ router.post('/courses/add', verifyToken, verifyAdminRole, async (req, res) => {
 
         const course = new CourseModel({
             courseName: req.body.courseName,
+            description: req.body.description,
             instructor: req.user.name,
             instructorId: req.user._id,
             courseLength: req.body.courseLength
@@ -92,7 +93,8 @@ router.post('/grades/add', verifyToken, verifyAdminRole, async (req, res) => {
             courseId: req.body.courseId,
             userName: req.body.userName,
             userId: req.body.userId,
-            grade: req.body.grade
+            grade: req.body.grade,
+            gradeDescription: req.body.gradeDescription
         });
 
         const gradeToAdd = await grade.save();

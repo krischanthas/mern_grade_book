@@ -17,11 +17,17 @@ const GradeSchema = new Schema({
         trim: true,
         min: 3
     },
-    grade : {
+    gradeDescription: {
+        type: String,
+        required: true,
+        trim: true,
+        min: 3
+    },
+    grade: {
         type: Number,
         required: true
     },
-    date : {
+    date: {
         type: Date,
         default: Date.now
     }

@@ -7,8 +7,14 @@ const CourseSchema = new Schema({
         required: true,
         trim: true
     },
+    description: {
+        type: String,
+        required: true,
+        default: 'No description available',
+        trim: true
+    },
     instructor: {
-        type: String, 
+        type: String,
         required: true,
         trim: true,
     },
@@ -19,9 +25,12 @@ const CourseSchema = new Schema({
     courseLength: {
         type: String,
         required: true,
- 
+
     },
-    createdDate : {
+    enrolledUsers: {
+        type: Array,
+    },
+    createdDate: {
         type: Date,
         default: Date.now
     }

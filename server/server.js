@@ -5,7 +5,8 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 // import routes
 const authRoute = require('./routes/authRoutes');
-const routes = require('./routes/routes'); 
+const routes = require('./routes/routes');
+const basicUserRoutes = require('./routes/basicUserRoutes');
 
 
 dotenv.config();
@@ -21,5 +22,6 @@ app.use(cors())
 // route middleware
 app.use('/api/users', authRoute)
 app.use('/api/', routes)
+app.use('/api/b/', basicUserRoutes)
 
 app.listen(7000, () => console.log('Server is running...'))
